@@ -1,0 +1,40 @@
+{
+  "name": "nodebackendcode",
+  "version": "1.0.0",
+  "description": "node and express backend code",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/norellanac/nodeBackendCode.git"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "norellanac",
+  "license": "MIT",
+  
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.2",
+    "passport": "^0.5.1",
+    "passport-jwt": "^4.0.0",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+
+  "bugs": {
+    "url": "https://github.com/norellanac/nodeBackendCode/issues"
+  },
+  "homepage": "https://github.com/norellanac/nodeBackendCode#readme"
+}
