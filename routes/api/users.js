@@ -18,7 +18,7 @@ router.get("/test", (req, res) => res.json({ msg: "Routes Works" }));
 router.post("/register", (req, res) => {
   User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
-      return res.status(400).json({ email: "Email Already exists" });
+      return res.status(403).json({ email: "Email Already exists" });
     } else {
       const avatar = gravatar.url(req.body.email, {
         s: "200",
@@ -37,8 +37,8 @@ router.post("/register", (req, res) => {
           newUSer.password = hash;
           newUSer
             .save()
-            .then((user) => res.json(user))
-            .catch((err) => res.json(err));
+            .then((user) => res.status(200).json(user))
+            .catch((err) => res.status(500).json(err));
         });
       });
     }
@@ -48,7 +48,7 @@ router.post("/register", (req, res) => {
 //@route    GET api/profile/test
 //@des  Login User - Returning the JWT token
 //@access   Public
-router.post("/login", (req, res) => {
+router.put("/credential", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
@@ -72,9 +72,9 @@ router.post("/login", (req, res) => {
         jwt.sign(
           payload,
           keys.secretOrKey,
-          { expiresIn: 3600 },
+          { expiresIn: 172800 },
           (err, token) => {
-            res.json({
+            res.status(200).json({
               succes: true,
               token: "Bearer " + token,
             });
@@ -88,9 +88,9 @@ router.post("/login", (req, res) => {
   });
 });
 
-//@route    POST api/profile/test
-//@des  Tests profile route
-//@access   Public
+//@route    GET api/profile/test
+//@des  Tests user auth route
+//@access   Private
 router.get(
   "/current",
   passport.authenticate("jwt", { session: false }),

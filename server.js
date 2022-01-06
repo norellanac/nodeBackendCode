@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const users = require ('./routes/api/users');
-const profile = require ('./routes/api/profile');
-const posts = require ('./routes/api/posts');
+const messages = require ('./routes/api/messages');
 
 const app=  express();
 //body parser middleware
@@ -30,9 +29,8 @@ require('./config/passport')(passport);
 
 
 //Use Routes
-app.use('/api/users', users);
-app.use('/api/posts', posts);
-app.use('/api/profile', profile);
+app.use('/', users);
+app.use('/', messages);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port  ${port}`))
