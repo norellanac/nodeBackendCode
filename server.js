@@ -13,12 +13,21 @@ app.use(bodyParser.json());
 
 //DB config
 const db = require('./config/keys').mongoURI;
+const passport = require('passport');
 //$ docker run --name some-mongo -d mongo:tag 
 //connect mongodb
 mongoose.connect(db)
 .then(()=> console.log("mongo db connected"))
 .catch(err => console.log("mongo error: ", err));
 app.get('/', (req, res) => res.send('Hey U'));
+
+
+//passport middleware
+app.use(passport.initialize());
+
+//passport Config
+require('./config/passport')(passport);
+
 
 //Use Routes
 app.use('/api/users', users);
