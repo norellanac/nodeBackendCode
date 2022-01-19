@@ -18,7 +18,7 @@ router.get("/test", (req, res) => res.json({ msg: "Routes Works" }));
 router.post("/register", (req, res) => {
   User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
-      return res.status(403).json({ email: "Email Already exists" });
+      return res.status(403).json({ message: "Email Already exists" });
     } else {
       const avatar = gravatar.url(req.body.email, {
         s: "200",
@@ -55,7 +55,7 @@ router.put("/credential", (req, res) => {
   //find user by email
   User.findOne({ email }).then((user) => {
     if (!user) {
-      return res.status(404).json({ email: "user not found" });
+      return res.status(404).json({ message: "user not found" });
     }
 
     //check password
